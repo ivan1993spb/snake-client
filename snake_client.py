@@ -61,7 +61,7 @@ while True:
                 snake = data["payload"]["payload"]
                 objects.set(snake["id"], snake["dots"])
                 
-                s.fill((255, 255, 255))
+                s.fill((0xaa, 0xaa, 0xaa))
 
                 for x, y in objects.all():
                     s.blit(img, (x*20, y*20))
