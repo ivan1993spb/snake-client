@@ -43,6 +43,9 @@ class Objects:
         else:
             object["dots"] = dots
 
+    def delete(self, id):
+        self.objects = list(filter(lambda object: object["id"] != id, self.objects))
+
     def all(self):
         for object in self.objects:
                 for x, y in object["dots"]:
@@ -57,14 +60,19 @@ while True:
         data = json.loads(result)
 
         if data["type"] == "game":
-            if data["payload"]["type"] == "update":
+            print(data["payload"]["type"])
+
+            if data["payload"]["type"] in ["update", "create"]:
                 snake = data["payload"]["payload"]
                 objects.set(snake["id"], snake["dots"])
-                
-                s.fill((0xaa, 0xaa, 0xaa))
+            elif data["payload"]["type"] == "delete":
+                snake = data["payload"]["payload"]
+                objects.delete(snake["id"])
 
-                for x, y in objects.all():
-                    s.blit(img, (x*20, y*20))
+            s.fill((0xaa, 0xaa, 0xaa))
+
+            for x, y in objects.all():
+                s.blit(img, (x*20, y*20))
 
     except KeyboardInterrupt:
         break
