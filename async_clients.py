@@ -3,8 +3,15 @@ import websockets
 from random import random
 
 connections = (
-    (0, 3),
+    (0, 10),
+    (1, 10),
+    (2, 10),
+    (3, 10),
+    (4, 10),
+    (5, 10),
 )
+
+print("connections", connections)
 
 async def run_conn(conn, group):
     await asyncio.sleep(random())
