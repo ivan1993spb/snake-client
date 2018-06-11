@@ -14,7 +14,7 @@ ws = create_connection(url)
 while True:
     try:
         result =  ws.recv()
-        print("Received '{}'".format(result))
+        print(result)
     except KeyboardInterrupt:
         break
 
